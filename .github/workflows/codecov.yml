@@ -7,7 +7,7 @@ on:
       - 'v*'
 
 permissions:
-    contents: read
+  contents: read
 
 jobs:
   build:
@@ -30,3 +30,4 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+        continue-on-error: false
