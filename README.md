@@ -15,7 +15,7 @@
 [![License](https://img.shields.io/badge/license-MIT-007ec6?label=license&style=flat&labelColor=282c34&logo=open-source-initiative)](https://github.com/habedi/template-zig-project/blob/main/LICENSE)
 [![Release](https://img.shields.io/github/release/habedi/template-zig-project.svg?label=release&style=flat&labelColor=282c34&logo=github)](https://github.com/habedi/template-zig-project/releases/latest)
 
-This is a project template for Zig projects.
+This is a template for Zig projects.
 It provides a minimalistic project structure with pre-configured GitHub Actions, Makefile, and a few useful
 configuration files.
 I share it here in case it might be useful to others.
