@@ -12,6 +12,7 @@
 [![Code Coverage](https://img.shields.io/codecov/c/github/habedi/template-zig-project?label=coverage&style=flat&labelColor=282c34&logo=codecov)](https://codecov.io/gh/habedi/template-zig-project)
 [![CodeFactor](https://img.shields.io/codefactor/grade/github/habedi/template-zig-project?label=code%20quality&style=flat&labelColor=282c34&logo=codefactor)](https://www.codefactor.io/repository/github/habedi/template-zig-project)
 [![Docs](https://img.shields.io/badge/docs-latest-007ec6?label=docs&style=flat&labelColor=282c34&logo=readthedocs)](docs)
+[![Examples](https://img.shields.io/github/v/tag/habedi/template-zig-project?label=examples&color=green&style=flat&labelColor=282c34&logo=zig)](https://github.com/habedi/template-zig-project/tree/main/examples)
 [![License](https://img.shields.io/badge/license-MIT-007ec6?label=license&style=flat&labelColor=282c34&logo=open-source-initiative)](https://github.com/habedi/template-zig-project/blob/main/LICENSE)
 [![Release](https://img.shields.io/github/release/habedi/template-zig-project.svg?label=release&style=flat&labelColor=282c34&logo=github)](https://github.com/habedi/template-zig-project/releases/latest)
 
