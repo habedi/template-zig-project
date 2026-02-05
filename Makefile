@@ -5,7 +5,7 @@ ifneq (,$(wildcard ./.env))
     include .env
     export $(shell sed 's/=.*//' .env)
 else
-    $(warning .env file not found. Environment variables not loaded.)
+    $(warning `.env` file not found. Environment variables not loaded.)
 endif
 
 ################################################################################
