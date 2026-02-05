@@ -36,7 +36,7 @@ SHELL         := /usr/bin/env bash
 # Targets
 ################################################################################
 
-.PHONY: all build rebuild run test cov lint format doc clean install-deps release help coverage
+.PHONY: all build rebuild run test cov lint format doc clean install-deps release help coverage setup-hooks test-hooks
 .DEFAULT_GOAL := help
 
 help: ## Show the help messages for all targets
