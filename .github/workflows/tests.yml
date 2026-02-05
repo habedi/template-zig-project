@@ -1,18 +1,27 @@
-name: Run Test
+name: Run Tests
 
 on:
   workflow_dispatch:
-  pull_request:
+  push:
     branches:
       - main
     tags:
       - 'v*'
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
 
 permissions:
   contents: read
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,5 +34,5 @@ jobs:
           sudo apt-get install -y make
           make install-deps
 
-      - name: Run the Tests
+      - name: Run Tests
         run: make test
