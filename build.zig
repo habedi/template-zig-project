@@ -8,18 +8,23 @@ pub fn build(b: *std.Build) void {
     const coverage = coverageOpt orelse false;
     _ = coverage; // autofix
 
-    const lib = b.addStaticLibrary(.{
+    const lib = b.addLibrary(.{
         .name = "template_zig_project",
-        .root_source_file = b.path("src/root.zig"),
-        .target = target,
-        .optimize = optimize,
+        .linkage = .static,
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/root.zig"),
+            .target = target,
+            .optimize = optimize,
+        }),
     });
 
     const exe = b.addExecutable(.{
         .name = "template-zig-project",
-        .root_source_file = b.path("src/main.zig"),
-        .target = target,
-        .optimize = optimize,
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/main.zig"),
+            .target = target,
+            .optimize = optimize,
+        }),
     });
 
     b.installArtifact(exe);
@@ -33,11 +38,13 @@ pub fn build(b: *std.Build) void {
 
     {
         const lib_tests = b.addTest(.{
-            .root_source_file = b.path("src/root.zig"),
-            .target = target,
-            .optimize = optimize,
+            .root_module = b.createModule(.{
+                .root_source_file = b.path("src/root.zig"),
+                .target = target,
+                .optimize = optimize,
+                .imports = &.{.{ .name = "template_zig_project", .module = lib.root_module }},
+            }),
         });
-        lib_tests.root_module.addImport("template_zig_project", lib.root_module);
         const lib_run = b.addRunArtifact(lib_tests);
         test_step.dependOn(&lib_run.step);
         const lib_install = b.addInstallArtifact(lib_tests, .{ .dest_sub_path = "test-root" });
@@ -46,11 +53,13 @@ pub fn build(b: *std.Build) void {
 
     {
         const ext_tests = b.addTest(.{
-            .root_source_file = b.path("tests/main.zig"),
-            .target = target,
-            .optimize = optimize,
+            .root_module = b.createModule(.{
+                .root_source_file = b.path("tests/main.zig"),
+                .target = target,
+                .optimize = optimize,
+                .imports = &.{.{ .name = "template_zig_project", .module = lib.root_module }},
+            }),
         });
-        ext_tests.root_module.addImport("template_zig_project", lib.root_module);
         const ext_run = b.addRunArtifact(ext_tests);
         test_step.dependOn(&ext_run.step);
         const ext_install = b.addInstallArtifact(ext_tests, .{ .dest_sub_path = "test-ext" });
