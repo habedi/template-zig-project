@@ -36,13 +36,13 @@ SHELL         := /usr/bin/env bash
 # Targets
 ################################################################################
 
-.PHONY: all build rebuild run test cov lint format doc clean install-deps release help coverage setup-hooks test-hooks
+.PHONY: all build rebuild run test cov lint format docs clean install-deps release help coverage setup-hooks test-hooks
 .DEFAULT_GOAL := help
 
 help: ## Show the help messages for all targets
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## ' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-10s %s\n", $$1, $$2}'
 
-all: build test lint doc  ## build, test, lint, and doc
+all: build test lint docs  ## build, test, lint, and doc
 
 build: ## Build project (Mode=$(BUILD_TYPE))
 	@echo "Building project in $(BUILD_TYPE) mode with $(JOBS) concurrent jobs..."
@@ -74,7 +74,7 @@ format: ## Format Zig files
 	@echo "Formatting Zig files..."
 	$(ZIG) fmt .
 
-doc: ## Generate API documentation
+docs: ## Generate API documentation
 	@echo "Generating documentation from $(DOC_SRC) to $(DOC_OUT)..."
 	mkdir -p $(DOC_OUT)
 	@if $(ZIG) doc --help > /dev/null 2>&1; then \
