@@ -101,3 +101,13 @@ coverage: ## Generate code coverage report
 	@zig build test -Denable-coverage=true
 	@echo "Generating coverage report..."
 	@kcov --include-pattern=src --verify coverage-out zig-out/bin/test-root
+
+setup-hooks: ## Install Git hooks (pre-commit and pre-push)
+	@echo "Installing Git hooks..."
+	@pre-commit install --hook-type pre-commit
+	@pre-commit install --hook-type pre-push
+	@pre-commit install-hooks
+
+test-hooks: ## Run Git hooks on all files manually
+	@echo "Running Git hooks..."
+	@pre-commit run --all-files
