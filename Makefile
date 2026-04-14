@@ -11,7 +11,7 @@ endif
 ################################################################################
 # Configuration and Variables
 ################################################################################
-ZIG           ?= zig
+ZIG    ?= $(shell echo ~/.local/share/zig/0.16.0/zig || which zig)
 ZIG_VERSION   := $(shell $(ZIG) version)
 BUILD_TYPE    ?= Debug
 BUILD_OPTS      = -Doptimize=$(BUILD_TYPE)

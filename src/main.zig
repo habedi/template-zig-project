@@ -1,26 +1,25 @@
 const std = @import("std");
 const root = @import("root.zig");
 
-pub fn main() !void {
+pub fn main(init: std.process.Init.Minimal) !void {
     const result = root.add(10, 5);
     std.debug.print("Result of add(10, 5) is: {}\n", .{result});
 
     root.greet("World");
 
-    const args = std.process.argsAlloc(std.heap.page_allocator) catch |err| {
-        std.debug.print("Failed to allocate memory for args: {}\n", .{err});
-        return err;
-    };
-    defer std.process.argsFree(std.heap.page_allocator, args);
+    var args = std.process.Args.Iterator.init(init.args);
+    defer args.deinit();
 
+    var count: usize = 0;
     std.debug.print("\nCommand line arguments:\n", .{});
-    for (args) |arg| {
+    while (args.next()) |arg| {
         std.debug.print("  Arg: {s}\n", .{arg});
+        count += 1;
     }
 
-    if (args.len < 2) {
+    if (count < 2) {
         std.debug.print(
-            "\nTry running with arguments: ./zig-out/bin/$(BINARY_NAME) arg1 arg2\n",
+            "\nTry running with arguments: ./zig-out/bin/template-zig-project arg1 arg2\n",
             .{},
         );
     }
