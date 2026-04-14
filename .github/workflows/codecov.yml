@@ -29,19 +29,23 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Dependencies
+      - name: Install Zig 0.16.0
+        run: |
+          curl -sSfL https://ziglang.org/download/0.16.0/zig-x86_64-linux-0.16.0.tar.xz | tar -xJ
+          echo "$PWD/zig-x86_64-linux-0.16.0" >> "$GITHUB_PATH"
+
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y make kcov
-          make install-deps
 
-      - name: Run Tests and Generate Coverage Report
+      - name: Run tests and generate coverage report
         run: make coverage
 
-      - name: Upload Coverage Reports to Codecov
+      - name: Upload coverage reports to codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
